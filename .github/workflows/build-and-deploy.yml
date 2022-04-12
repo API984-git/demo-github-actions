@@ -29,8 +29,8 @@ jobs:
     
     - name : Print env_vars
       run: |
-        echo KEY: '${PROD_KEY}'
-        echo VERSION : '${MULE_VERSION}'
+        echo KEY: '${env.PROD_KEY}'
+        echo VERSION : '${env.MULE_VERSION}'
         
     - uses: actions/cache@v1
       with:
