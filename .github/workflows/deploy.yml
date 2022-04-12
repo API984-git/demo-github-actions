@@ -31,7 +31,8 @@ jobs:
     
     - uses: actions/download-artifact@master
       with:
-        name: artifacts
+          name: artifacts
+          path: target/*.jar
     
     - name: Deploy to Sandbox
       env:
