@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="git-actions-pocFlow" doc:id="d6fa0d21-ae28-45c5-ba67-dd81e9755483" >
+		<scheduler doc:name="Scheduler" doc:id="8f9f14ba-2f89-40ce-9630-80d2f60702bd" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="10" timeUnit="SECONDS"/>
+			</scheduling-strategy>
+		</scheduler>
+		<logger level="INFO" doc:name="Logger" doc:id="e5a8e5c6-5aa9-4b6d-a5ab-f17e99d31852" message='#["PIPELINE SUCCESS"]'/>
+	</flow>
+</mule>
