@@ -31,9 +31,9 @@ jobs:
     
     - uses: actions/download-artifact@master
       with:
+          workflow: build-and-deploy.yml
           name: artifacts
-          path: target/*.jar
-    
+            
     - name: Deploy to Sandbox
       env:
         USERNAME: ${{ secrets.USERNAME }}
