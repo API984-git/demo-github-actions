@@ -27,9 +27,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     
-    - uses: dawidd6/action-download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
-          workflow: build-and-deploy.yml
           name: artifacts
             
     - name: Deploy to Sandbox
