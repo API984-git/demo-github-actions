@@ -13,7 +13,10 @@ jobs:
         
     - name : Create copy of pom.xml
       run: cp pom.xml cache_key.xml
-
+      
+    - name : Remove version tag from cache_key
+      run: sed -i '/<version>/,/<\/version>/d' cache_key.xml
+      
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
