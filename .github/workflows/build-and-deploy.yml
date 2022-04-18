@@ -8,21 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install sudo package
-      run: apt update && apt install sudo
-       
-    - name: Installing xmlstarlet
-      run: |
-          sudo apt-get update
-          sudo apt-get install xmlstarlet
-          
+    
     - uses: actions/checkout@v2
         
     - name : Create copy of pom.xml
       run: cp pom.xml cache_key.xml
       
     - name:  Remove version tag from cache_key
-      run: xmlstarlet ed -P -d '//version' cache_key.xml
+      uses: Mudlet/xmlstarlet-action@master
+      with:
+       args: ed -P -L --delete //@version cache_key
 
     - name : Print cache_key
       run: cat cache_key.xml      
