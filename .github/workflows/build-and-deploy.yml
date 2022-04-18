@@ -15,7 +15,8 @@ jobs:
       run: cp pom.xml cache_key.xml
       
     - name : Remove version tag from cache_key
-      run: sed -i '/<version>/,/<\/version>/d' cache_key.xml
+      run: xmlstarlet ed -L \
+              -d '//version' cache_key.xml
 
     - name : Print cache_key
       run: cat cache_key.xml      
