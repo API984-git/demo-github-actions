@@ -12,9 +12,6 @@ jobs:
     steps:
     
     - uses: actions/checkout@v2
-    
-    - name : Create copy of pom.xml
-      run: cp pom cache_key
 
 
 
