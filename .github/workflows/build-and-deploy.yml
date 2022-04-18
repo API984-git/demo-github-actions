@@ -18,11 +18,11 @@ jobs:
       id: remove_version
       uses: Mudlet/xmlstarlet-action@master
       with:
-       args: ed -P -S -d "//version" cache_key.xml > temp.xml
-       
+       args: ed -L -N x="http://maven.apache.org/POM/4.0.0" -d "//x:version" cache_key.xml
+      
       
     - name : Print cache_key
-      run: cat temp.xml      
+      run: cat cache_key.xml      
       
       
     - uses: actions/cache@v1
