@@ -21,7 +21,7 @@ jobs:
        args: ed -P -L --delete //version cache_key.xml
        
     - name : Copy output to cache_key.xml
-      run: cp ${{steps.remove_version.xmlstarlet_result}} cache_key.xml
+      run: echo ${{steps.remove_version.xmlstarlet_result}} 
       
     - name : Print cache_key
       run: cat cache_key.xml      
