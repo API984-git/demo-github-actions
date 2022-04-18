@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install sudo package
-       run: apt update && apt install sudo
+      run: apt update && apt install sudo
        
     - name: Installing xmlstarlet
-        run: |
+      run: |
           sudo apt-get update
 		  sudo apt-get install xmlstarlet
           
