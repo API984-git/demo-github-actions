@@ -15,8 +15,8 @@ jobs:
     
     - name : Create copy of pom.xml
       run: |
-        cp pom.xml cache_key.xml
-        sed -i '/<version>/,/<\/version>/d' cache_key.xml
+        cp pom cache_key
+
 
 
    - uses: actions/cache@v1
