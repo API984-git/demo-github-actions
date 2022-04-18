@@ -17,7 +17,7 @@ jobs:
     - name:  Remove version tag from cache_key
       uses: Mudlet/xmlstarlet-action@master
       with:
-       args: ed -d '//version[1]' cache_key.xml
+       args: ed -d '/project/version[1]' cache_key.xml
 
     - name : Print cache_key
       run: cat cache_key.xml      
