@@ -18,13 +18,11 @@ jobs:
       id: remove_version
       uses: Mudlet/xmlstarlet-action@master
       with:
-       args: ed -P -L --delete //version cache_key.xml
+       args: ed -P -S -d "//version" cache_key.xml > temp.xml
        
-    - name : Copy output to cache_key.xml
-      run: echo "${{steps.remove_version.xmlstarlet_result}}" 
       
     - name : Print cache_key
-      run: cat cache_key.xml      
+      run: cat temp.xml      
       
       
     - uses: actions/cache@v1
