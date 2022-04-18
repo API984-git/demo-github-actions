@@ -15,9 +15,7 @@ jobs:
       run: cp pom.xml cache_key.xml
       
     - name:  Remove version tag from cache_key
-      uses: Mudlet/xmlstarlet-action@master
-      with:
-       args: ed -d '//project/version' cache_key.xml
+      run: xq -x 'del(.project.version)' file.xml
 
     - name : Print cache_key
       run: cat cache_key.xml      
