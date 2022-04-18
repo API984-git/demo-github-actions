@@ -12,8 +12,7 @@ jobs:
     - uses: actions/checkout@v2
         
     - name : Create copy of pom.xml
-      uses: actions/checkout@v2
-      run: cp pom cache_key
+      run: cp pom.xml cache_key.xml
 
     - uses: actions/cache@v1
       with:
