@@ -14,10 +14,10 @@ jobs:
     - name : Create copy of pom.xml
       run: cp pom.xml cache_key.xml
       
-    - name : Remove version tag from cache_key
-      run: |
-        $ sudo dnf install xmlstarlet
-        xmlstarlet ed -L \
+    - name:  Remove version tag from cache_key
+      uses: Mudlet/xmlstarlet-action@master
+      with:
+       args: ed -L \
               -d '//version' cache_key.xml
 
     - name : Print cache_key
