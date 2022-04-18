@@ -1,24 +1,20 @@
-# This workflow will build a MuleSoft project and deploy to CloudHub
-
 name: Build and Deploy to Sandbox
 
 on:
   push:
-    branches: [main]
-    
+    branches:        
+        - main 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     
-   - uses: actions/checkout@v2
-
-
-
-   - uses: actions/cache@v1
+    - uses: actions/checkout@v2
+    
+    - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/cache_key.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     
@@ -44,4 +40,3 @@ jobs:
           path: target/*.jar
           
 
-  
