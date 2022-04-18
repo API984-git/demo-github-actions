@@ -16,26 +16,18 @@ jobs:
       PROD_KEY : ${{secrets.PROD_KEY}}
       MULE_VERSION : 4.4.0
       
-    steps:
-    - name: Slack Notification
-      uses: act10ns/slack@v1
-      with: 
-        status: starting
-        channel: '#github-actions-demo'
-        message: Starting Build and Deploy...
-      if: always()
-    
     - uses: actions/checkout@v2
     
-    - name : Print env_vars
+    - name : Create copy of pom.xml
       run: |
-        echo "KEY: $PROD_KEY"
-        echo "VERSION : $MULE_VERSION"
-        
-    - uses: actions/cache@v1
+        cp pom.xml cache_key.xml
+        sed -i '/<version>/,/<\/version>/d' cache_key.xml
+
+
+   - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/cache_key.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     
@@ -60,44 +52,5 @@ jobs:
           name: artifacts
           path: target/*.jar
           
-    - name: Slack Notification
-      uses: act10ns/slack@v1
-      with: 
-        status: ${{ job.status }}
-        channel: '#github-actions-demo'
-        message: Build {{ env.GITHUB_REF_NAME }} branch Successfully
-      if: always()     
-      
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-    steps:    
-    
-    - uses: actions/checkout@v2
-    
-    - uses: actions/download-artifact@master
-      with:
-        name: artifacts
-    
-    - name: Deploy to Sandbox
-      env:
-        USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-      run: |
-        artifactName=$(ls *.jar | head -1)
-        mvn deploy -DmuleDeploy \
-         -Dmule.artifact=$artifactName \
-         -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD" \
-         -DskipTests
-
-    - name: Slack Notification
-      uses: act10ns/slack@v1
-      with: 
-        status: ${{ job.status }}
-        channel: '#github-actions-demo'
-        message: Deployed {{ env.GITHUB_REF_NAME }} branch Successfully
-      if: always()  
+  
